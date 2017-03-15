@@ -41,7 +41,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open var notificationCenter: NotificationCenter?
     
     internal let passcodeConfiguration: PasscodeLockConfigurationType
-    internal var passcodeLock: PasscodeLockType
+    open var passcodeLock: PasscodeLockType
     internal var isPlaceholdersAnimationCompleted = true
     
     fileprivate var shouldTryToAuthenticateWithBiometrics = true
