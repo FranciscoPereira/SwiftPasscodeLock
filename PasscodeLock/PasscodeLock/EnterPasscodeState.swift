@@ -10,12 +10,12 @@ import Foundation
 
 public let PasscodeLockIncorrectPasscodeNotification = Notification.Name("passcode.lock.incorrect.passcode.notification")
 
-struct EnterPasscodeState: PasscodeLockStateType {
+public struct EnterPasscodeState: PasscodeLockStateType {
     
-    let title: String
-    let description: String
-    let isCancellableAction: Bool
-    var isTouchIDAllowed = true
+    public let title: String
+    public let description: String
+    public let isCancellableAction: Bool
+    public var isTouchIDAllowed = true
     
     fileprivate var incorrectPasscodeAttemptsKey = "incorrectPasscodeAttemps"
     private var incorrectPasscodeAttempts: Int {
@@ -35,7 +35,7 @@ struct EnterPasscodeState: PasscodeLockStateType {
         description = localizedStringFor("PasscodeLockEnterDescription", comment: "Enter passcode description")
     }
     
-    mutating func accept(passcode: String, from lock: PasscodeLockType) {
+    public mutating func accept(passcode: String, from lock: PasscodeLockType) {
         if lock.repository.check(passcode: passcode) {
         
             lock.delegate?.passcodeLockDidSucceed(lock)
