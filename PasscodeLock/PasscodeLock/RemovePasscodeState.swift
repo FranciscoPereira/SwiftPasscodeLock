@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct RemovePasscodeState: PasscodeLockStateType {
-    let title: String
-    let description: String
-    let isCancellableAction = false
-    var isTouchIDAllowed: Bool { return false }
+public struct RemovePasscodeState: PasscodeLockStateType {
+    public let title: String
+    public let description: String
+    public let isCancellableAction = false
+    public var isTouchIDAllowed: Bool { return false }
     
     private var isNotificationSent = false
     
@@ -32,7 +32,7 @@ struct RemovePasscodeState: PasscodeLockStateType {
         description = localizedStringFor("PasscodeLockEnterDescription", comment: "Enter passcode description")
     }
     
-    mutating func accept(passcode: String, from lock: PasscodeLockType) {
+    public mutating func accept(passcode: String, from lock: PasscodeLockType) {
         if lock.repository.check(passcode: passcode) {
             
             lock.repository.delete()
