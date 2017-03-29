@@ -8,24 +8,26 @@
 
 import UIKit
 
-open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
-    
-    public enum LockState {
-        case enter
-        case set
-        case change
-        case remove
+public enum LockState {
+    case enter
+    case set
+    case change
+    case remove
+}
+
+public extension LockState {
+    func getState() -> PasscodeLockStateType {
         
-        func getState() -> PasscodeLockStateType {
-            
-            switch self {
-            case .enter: return EnterPasscodeState()
-            case .set: return SetPasscodeState()
-            case .change: return ChangePasscodeState()
-            case .remove: return RemovePasscodeState()
-            }
+        switch self {
+        case .enter: return EnterPasscodeState()
+        case .set: return SetPasscodeState()
+        case .change: return ChangePasscodeState()
+        case .remove: return RemovePasscodeState()
         }
     }
+}
+
+open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
     
     @IBOutlet open weak var titleLabel: UILabel?
     @IBOutlet open weak var descriptionLabel: UILabel?
