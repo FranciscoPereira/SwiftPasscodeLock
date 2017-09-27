@@ -58,9 +58,10 @@ open class PasscodeLock: PasscodeLockType {
     }
     
     open func changeState(_ state: PasscodeLockStateType) {
-        
-        lockState = state
-        delegate?.passcodeLockDidChangeState(self)
+        DispatchQueue.main.async {
+            self.lockState = state
+            self.delegate?.passcodeLockDidChangeState(self)
+        }
     }
     
     open func authenticateWithTouchID() {
