@@ -76,11 +76,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        
-        clearEvents()
-    }
-    
     // MARK: - View
     
     open override func viewDidLoad() {
@@ -88,8 +83,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         updatePasscodeView()
         deleteSignButton?.isEnabled = false
-        
-        setupEvents()
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -107,30 +100,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         descriptionLabel?.text = passcodeLock.state.description
         cancelButton?.isHidden = !passcodeLock.state.isCancellableAction
         touchIDButton?.isHidden = !passcodeLock.isTouchIDAllowed
-    }
-    
-    // MARK: - Events
-    
-    fileprivate func setupEvents() {
-        
-        notificationCenter?.addObserver(self, selector: #selector(PasscodeLockViewController.appWillEnterForegroundHandler(_:)), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
-        notificationCenter?.addObserver(self, selector: #selector(PasscodeLockViewController.appDidEnterBackgroundHandler(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
-    }
-    
-    fileprivate func clearEvents() {
-        
-        notificationCenter?.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        notificationCenter?.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-    }
-    
-    open func appWillEnterForegroundHandler(_ notification: Notification) {
-        
-        authenticateWithTouchID()
-    }
-    
-    open func appDidEnterBackgroundHandler(_ notification: Notification) {
-        
-        shouldTryToAuthenticateWithBiometrics = false
     }
     
     // MARK: - Actions
